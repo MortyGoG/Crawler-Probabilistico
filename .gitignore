@@ -1,0 +1,9 @@
+# Ignorar txt y csv #
+*.txt
+*.csv
+
+# Ignorar archivo #
+2_Practica.py
+
+# Ignorar Archivos de IDE's
+*~

@@ -21,9 +21,9 @@ cd Crawler-Probabilisitico
 Utiliza pip para instalar las bibliotecas necesarias:
 ```shell
 pip install -r requirements.txt
+```
 
 3. Ejecuta desde tú entorno virtual para poder observar el proyecto
 
 Nota:
 Es necesario colocar documentos de texto en la carpeta "gatos/gatos/spiders/" o en su defecto quitar los comentarios del script(Web crawler ultimas lineas del codigo).
-```

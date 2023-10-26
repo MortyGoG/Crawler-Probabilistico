@@ -3,8 +3,8 @@ import os
 import re
 from unidecode import unidecode
 import numpy as np
+import platform
 
-import time
 
 ''' Stemming '''
 import nltk  # Importamos la bilbioteca nltk
@@ -69,12 +69,23 @@ def on_cerrar_ventana():
 
 def abrir_txt_con_aplicacion_predeterminada(nombre_txt):
     ''' Abrir txt con app predeterminada'''
-    try:
-        subprocess.Popen([nombre_txt], shell=True)
-    except Exception as e:
-        print(f"No se pudo abrir el archivo text: {e}")
+    # Obtener el nombre del sistema operativo
+    sistema_operativo = platform.system()
+    # Usar un if para tomar decisiones basadas en el sistema operativo
+    if sistema_operativo == 'Windows':
+        # Abrir el archivo con el programa predeterminado windows
+        try:
+            subprocess.Popen([nombre_txt], shell=True)
+        except Exception as e:
+            print(f"No se pudo abrir el archivo text: {e}")
+    elif sistema_operativo == 'Darwin':  # 'Darwin' es el sistema base de macOS
+        # Abrir el archivo con el programa predeterminado de macOS
+        try:
+            subprocess.Popen(['open', nombre_txt])
+        except Exception as e:
+            print(f"No se pudo abrir el archivo text: {e}")
 
-
+   
 def ejecutarScript():
     # Ruta del script a ejecutar
     ruta_script = 'gatos/gatos/spiders/spider1.py'
@@ -322,7 +333,6 @@ def vector_consulta(terminos_consulta):
                 break
         # Colocamos el valor en el vector de consulta
         vector_en_consulta[0, i] = tf
-        # input("Press Enter to continue...")
     
     # Guardar matriz tf en un archivo csv
     idf = pd.DataFrame(vector_en_consulta)
@@ -493,7 +503,7 @@ def btnMatrizTxt():
 
 
 # Crear un botón y asociarle la función btnMatrizTxt
-boton_MatrizTxt = Button(raiz, text="Mostrar Matriz TF_IDF", command = btnMatrizTxt, bg="#444654", fg="white", relief="flat", padx=10, pady=5)
+boton_MatrizTxt = Button(raiz, text="Mostrar Matriz Booleana", command = btnMatrizTxt, bg="#444654", fg="white", relief="flat", padx=10, pady=5)
 # se enpaqueta el botón y se colóca en la ventana. 
 boton_MatrizTxt.pack()
 # posiciona el bóton en los pixeles de la pantallas
@@ -645,7 +655,6 @@ label_facts.place(x=410, y=15)
 raiz.title("RI Sistem") 
 # Tamaño de la ventana
 raiz.geometry("1400x900+200+50")
-#raiz.geometry("1400x900")
 # Desactivar el redimensionamiento de la ventana
 raiz.resizable(False, False)
 #Color de la ventana

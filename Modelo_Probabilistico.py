@@ -30,7 +30,7 @@ from tkinter import font
 
 
 # Carpeta de Dcoumentos txt
-carpeta_txt = 'gatos\\gatos\\spiders\\'
+carpeta_txt = 'gatos/gatos/spiders/'
 # Nombre de archivos
 archivos_txt = []
 # Texto de los PDFs
@@ -77,7 +77,7 @@ def abrir_txt_con_aplicacion_predeterminada(nombre_txt):
 
 def ejecutarScript():
     # Ruta del script a ejecutar
-    ruta_script = 'gatos\\gatos\\spiders\\spider1.py'
+    ruta_script = 'gatos/gatos/spiders/spider1.py'
 
     # Obtiene la ruta completa al directorio del script actual
     directorio_actual = os.path.dirname(os.path.abspath(__file__))

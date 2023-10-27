@@ -109,7 +109,7 @@ def ejecutarScript():
         # Abrir el archivo con el programa predeterminado windows
         try:
             # Ruta del script a ejecutar
-            ruta_script = 'gatos\gatos\spiders\spider1.py'
+            ruta_script = 'gatos\\gatos\\spiders\\spider1.py'
         except Exception as e:
             print(f"No se pudo abrir el archivo text: {e}")
     elif sistema_operativo == 'Darwin':  # 'Darwin' es el sistema base de macOS
@@ -131,6 +131,9 @@ def ejecutarScript():
 
     # Cambia el directorio actual al directorio del script
     os.chdir(os.path.dirname(ruta_completa))
+
+    print(ruta_completa)
+    input()
 
     # Ejecuta el comando "scrapy crawl ejemplo_spider"
     subprocess.run(["scrapy", "crawl", "spider1"])
@@ -740,6 +743,26 @@ boton_MatrizTxt.bind("<Leave>", restaurar_color3)
 boton_guardar.bind("<Enter>", cambiar_color4)
 boton_guardar.bind("<Leave>", restaurar_color4)
 
+# Abrir ventana de carga
+ventana_emergente = tk.Toplevel(raiz)
+ventana_emergente.title("Espera un momento")
+
+# Calcular el centro de la ventana principal
+ancho_ventana_principal = raiz.winfo_width()
+alto_ventana_principal = raiz.winfo_height()
+x_centro = (ancho_ventana_principal - 400) // 2  # Ajusta el ancho de la ventana emergente
+y_centro = (alto_ventana_principal - 200) // 2  # Ajusta el alto de la ventana emergente
+    
+# Colocar la ventana emergente en el centro
+ventana_emergente.geometry(f"+{x_centro}+{y_centro}")
+ventana_emergente.configure(bg="lightblue")
+    
+etiqueta = tk.Label(ventana_emergente, text="C A R G A N D O...", bg="lightblue", fg="black", font="Arial 20")
+etiqueta.pack(fill="both", expand=True)
+etiqueta.configure(bg="lightblue") 
+
+raiz.update()
+
 # Ejecucion de Script Web Crawling
 ejecutarScript()
 print("Se ejecuto el script")
@@ -761,6 +784,7 @@ print("Texto Tokenizado con exito...")
 generar_matriz_booleana()
 print("Puedes escribir tú consulta...")
 
+ventana_emergente.destroy()  # Cierra la ventana de carga
 
 ''' Mostrar Ventana '''
 #Se visualiza la ventena (Siempre debe de ir al final)

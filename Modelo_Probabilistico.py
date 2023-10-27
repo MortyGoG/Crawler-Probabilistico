@@ -647,7 +647,7 @@ def obtener_texto():
         hipervinculo.configure(font=("Arial", 20))
         hipervinculo.pack()
         # Vincular el evento de clic a la función
-        hipervinculo.bind("<Button-1>", lambda event, nombre_txt=f"gatos\\gatos\\spiders\\Doc{documento_formato}.txt": abrir_txt_con_aplicacion_predeterminada(nombre_txt))
+        hipervinculo.bind("<Button-1>", lambda event, nombre_txt=f"gatos\gatos\spiders\Doc{documento_formato}.txt": abrir_txt_con_aplicacion_predeterminada(nombre_txt))
 
     # Nombre del txt
     nombre_txt = "resultado.txt"

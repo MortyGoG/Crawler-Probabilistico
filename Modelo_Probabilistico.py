@@ -28,9 +28,24 @@ from tkinter import * # libreria para hacer interfaces
 import os #libreria para manipular directorios del S.O
 from tkinter import font
 
+# Obtener el nombre del sistema operativo
+sistema_operativo = platform.system()
+# Usar un if para tomar decisiones basadas en el sistema operativo
+if sistema_operativo == 'Windows':
+    # Abrir el archivo con el programa predeterminado windows
+    try:
+        # Carpeta de Dcoumentos txt
+        carpeta_txt = 'gatos\\gatos\\spiders\\'
+    except Exception as e:
+        print(f"No se pudo abrir el archivo text: {e}")
+elif sistema_operativo == 'Darwin':  # 'Darwin' es el sistema base de macOS
+    # Abrir el archivo con el programa predeterminado de macOS
+    try:
+        # Carpeta de Dcoumentos txt
+        carpeta_txt = 'gatos/gatos/spiders/'
+    except Exception as e:
+        print(f"No se pudo abrir el archivo text: {e}")
 
-# Carpeta de Dcoumentos txt
-carpeta_txt = 'gatos/gatos/spiders/'
 # Nombre de archivos
 archivos_txt = []
 # Texto de los PDFs
@@ -87,8 +102,23 @@ def abrir_txt_con_aplicacion_predeterminada(nombre_txt):
 
    
 def ejecutarScript():
-    # Ruta del script a ejecutar
-    ruta_script = 'gatos/gatos/spiders/spider1.py'
+    # Obtener el nombre del sistema operativo
+    sistema_operativo = platform.system()
+    # Usar un if para tomar decisiones basadas en el sistema operativo
+    if sistema_operativo == 'Windows':
+        # Abrir el archivo con el programa predeterminado windows
+        try:
+            # Ruta del script a ejecutar
+            ruta_script = 'gatos\gatos\spiders\spider1.py'
+        except Exception as e:
+            print(f"No se pudo abrir el archivo text: {e}")
+    elif sistema_operativo == 'Darwin':  # 'Darwin' es el sistema base de macOS
+        # Abrir el archivo con el programa predeterminado de macOS
+        try:
+            # Ruta del script a ejecutar
+            ruta_script = 'gatos/gatos/spiders/spider1.py'
+        except Exception as e:
+            print(f"No se pudo abrir el archivo text: {e}")
 
     # Obtiene la ruta completa al directorio del script actual
     directorio_actual = os.path.dirname(os.path.abspath(__file__))

@@ -13,7 +13,7 @@ Asegúrate de tener instalado Python en tu sistema. Este proyecto se basa en Pyt
 
 1. Clonar el repositorio:
 ```shell
-git clone https://github.com/tuusuario/Crawler-Probabilistico.git
+git clone https://github.com/MortyGoG/Crawler-Probabilistico.git
 cd Crawler-Probabilisitico
 ```
 

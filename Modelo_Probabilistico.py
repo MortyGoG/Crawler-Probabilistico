@@ -363,8 +363,8 @@ def calcular_qj():
         qj[0, j] = suma / len(archivos_txt)
         # Reiniciar la suma
         suma = 0
-    print("qj:")
-    print(qj)
+    # print("qj:")
+    # print(qj)
     
     
 def sumar_filas():
@@ -405,8 +405,21 @@ def calcular_similitud():
     for j in range(len(diccionario_terminos)):
         # Operacion por documento
         for i in range(len(archivos_txt)):
-            similitud = matriz_booleana[i][j] * vector_en_consulta[0][j] * np.log10((pj*(1-qj[0][j]))/(qj[0][j]*(1-pj)))
+            if pj != 0 and qj[0][j] != 0 and vector_en_consulta[0][j] != 0:
+                # print("Matriz Booleana: ")
+                # print(matriz_booleana[i][j])
+                # print("Vector en consulta: ")
+                # print(vector_en_consulta[0][j])
+                # print("Pj: ")
+                # print(pj)
+                # print("qj: ")
+                # print(qj[0][j])
+                similitud = matriz_booleana[i][j] * vector_en_consulta[0][j] * np.log10((pj*(1-qj[0][j]))/(qj[0][j]*(1-pj)))
+            else:
+                similitud = 0
             # Colocar el valor en matriz de similitud
+            # print("Similitud: ")
+            # print(similitud)
             matriz_similitud[i][j] = similitud
         
     # Guardar matriz tf en un archivo csv
@@ -568,14 +581,30 @@ def obtener_texto():
     print(consulta)
     print("Aplicar Stopwods y stemming con exito")
     
-    ''' Agregar consulta en Matriz tf-idf '''
+    ''' Agregar consulta en Vector '''
     vector_consulta(consulta)
     
     ''' Mostrar resultado '''
     # Procesar Matriz de similitud
     resultado_consulta = calcular_similitud()
-    print("Resultado consulta:")
-    print(resultado_consulta)
+    # print("Resultado consulta:")
+    # print(resultado_consulta)
+    
+    # Comprobar Consulta
+    VectorSuma = sum(resultado_consulta)
+    # print(VectorSuma)
+    if consulta == "" or VectorSuma == 0:
+        # Antes de agregar los nuevos hipervínculos, eliminar los antiguos
+        for widget in panel.winfo_children():
+            widget.destroy()
+        print("No se ingreso nada")
+        # Cerrar ventana de carga
+        ventana_emergente.destroy()
+        # Infonte.
+        fuente = ("Arial", 20)
+        label_facts = tk.Label(panel, text="No hay resultados", bg="#343641", fg="#C5C5D2", font=fuente)
+        label_facts.pack()
+        return
 
     # Mostramos los documentos en terminal y los guardamos en una lista
     print("sem(q,di):")
@@ -606,6 +635,8 @@ def obtener_texto():
 
     # Agregar contenido al panel
     for documento in diccionario_ordenado.keys():
+        if diccionario_ordenado[documento] == 0:
+            continue
         documento = str(documento)
         documento_formato= documento.zfill(2)
         # Crea una fuente con subrayado
@@ -680,8 +711,8 @@ boton_guardar.bind("<Enter>", cambiar_color4)
 boton_guardar.bind("<Leave>", restaurar_color4)
 
 # Ejecucion de Script Web Crawling
-# ejecutarScript()
-# print("Se ejecuto el script")
+ejecutarScript()
+print("Se ejecuto el script")
 
 # Recabar nombres de txt obtenidos
 archivos_txt = [archivo for archivo in os.listdir(

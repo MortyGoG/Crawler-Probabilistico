@@ -37,7 +37,7 @@ class Spider1Spider(scrapy.Spider):
         # with open('Enlaces.txt', 'w', encoding='utf-8') as archivo:
         #     for enlace in self.enlaces:
         #         archivo.write(enlace + '\n')
-        input()         
+        # input()         
         
         # Crawling profundo
         for _ in range(0, 1):

@@ -100,6 +100,32 @@ def abrir_txt_con_aplicacion_predeterminada(nombre_txt):
         except Exception as e:
             print(f"No se pudo abrir el archivo text: {e}")
 
+def abrir_txt_resultado(nombre_txt):
+    ''' Abrir txt con app predeterminada'''
+    # Obtener el nombre del sistema operativo
+    sistema_operativo = platform.system()
+
+    # Usar un if para tomar decisiones basadas en el sistema operativo
+    if sistema_operativo == 'Windows':
+        # Abrir el archivo con el programa predeterminado windows
+        try:
+            ruta_archivo = "gatos\\gatos\\spiders\\" + nombre_txt
+            ruta_absoluta = os.path.abspath(ruta_archivo)
+            subprocess.Popen(["start", "", ruta_absoluta], shell=True)
+            return
+        except Exception as e:
+            print(f"No se pudo abrir el archivo text: {e}")
+    elif sistema_operativo == 'Darwin':  # 'Darwin' es el sistema base de macOS
+        # Abrir el archivo con el programa predeterminado de macOS
+        try:
+            ruta_archivo = "gatos/gatos/spiders/" + nombre_txt
+            ruta_absoluta = os.path.abspath(ruta_archivo)
+            subprocess.Popen(["start", "", ruta_absoluta], shell=True)
+            return
+        except Exception as e:
+            print(f"No se pudo abrir el archivo text: {e}")
+
+
    
 def ejecutarScript():
     # Obtener el nombre del sistema operativo
@@ -131,9 +157,6 @@ def ejecutarScript():
 
     # Cambia el directorio actual al directorio del script
     os.chdir(os.path.dirname(ruta_completa))
-
-    print(ruta_completa)
-    input()
 
     # Ejecuta el comando "scrapy crawl ejemplo_spider"
     subprocess.run(["scrapy", "crawl", "spider1"])
@@ -680,7 +703,7 @@ def obtener_texto():
         hipervinculo.configure(font=("Arial", 20))
         hipervinculo.pack()
         # Vincular el evento de clic a la función
-        hipervinculo.bind("<Button-1>", lambda event, nombre_txt=f"gatos/gatos/spiders/Doc{documento_formato}.txt": abrir_txt_con_aplicacion_predeterminada(nombre_txt))
+        hipervinculo.bind("<Button-1>", lambda event, nombre_txt=f"Doc{documento_formato}.txt": abrir_txt_resultado(nombre_txt))
 
     # Nombre del txt
     nombre_txt = "resultado.txt"
